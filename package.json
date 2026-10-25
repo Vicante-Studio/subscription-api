@@ -1,0 +1,27 @@
+{
+  "name": "subscription-backend",
+  "version": "1.0.0",
+  "description": "An API for handling subscriptions",
+  "author": "Vicante Studio",
+  "private": "true",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "dev": "tsx watch --env-file=.env server.ts"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0",
+    "typescript-eslint": "^8.72.0"
+  }
+}
