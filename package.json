@@ -1,7 +1,7 @@
 {
-  "name": "subscription-backend",
+  "name": "subscription-tracker-api",
   "version": "1.0.0",
-  "description": "An API for handling subscriptions",
+  "description": "An API for tracking subscriptions",
   "author": "Vicante Studio",
   "private": "true",
   "type": "module",

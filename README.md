@@ -1,1 +1,1 @@
-# subscription-api
+# Subscription Tracker API
