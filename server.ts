@@ -5,6 +5,7 @@ import userRouter from './src/routes/user.routes.js';
 import subscriptionRouter from './src/routes/subscriptions.routes.js';
 import authRouter from './src/routes/auth.route.js';
 import connectToDatabase from './database/mongodb.js';
+import errorMiddleware from './middlewares/error.middleware.js';
 
 const app = express();
 
@@ -13,13 +14,6 @@ const allowedOrigins = [
 ];
 
 const PORT = Number(process.env.PORT) || 4000;
-
-export const testData = {
-  name: "Batubo Victory",
-  age: 22,
-  role: "Software Engineer",
-  school: "NOUN"
-};
 
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
@@ -36,14 +30,14 @@ const corsOptions: CorsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json()); // after cors, before routes
+app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.send(testData);
-});
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/subscriptions', subscriptionRouter);
+
+app.use(errorMiddleware);
 
 app.listen(PORT, async() => {
   console.log(`Subscription Tracker API is running on http://localhost:${PORT}`);
