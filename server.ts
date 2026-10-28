@@ -4,8 +4,8 @@ import cors, {type CorsOptions} from 'cors';
 import userRouter from './src/routes/user.routes.js';
 import subscriptionRouter from './src/routes/subscriptions.routes.js';
 import authRouter from './src/routes/auth.route.js';
-import connectToDatabase from './database/mongodb.js';
-import errorMiddleware from './middlewares/error.middleware.js';
+import connectToDatabase from './src/database/mongodb.js';
+import errorMiddleware from './src/middlewares/error.middleware.js';
 
 const app = express();
 
