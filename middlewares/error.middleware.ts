@@ -1,6 +1,12 @@
 import type { NextFunction, Request, Response } from "express";
 
-const errorMiddleware = (err, req: Request, res: Response, next: NextFunction) => {
+interface AppError extends Error {
+  statusCode?: number;
+  code?: number; // Mongo duplicate key (11000)
+  errors?: Record<string, { message: string }>; // Mongoose validation errors
+}
+
+const errorMiddleware = (err: AppError, req: Request, res: Response, next: NextFunction) => {
   try {
     let error = { ...err };
     error.message = err.message;
@@ -8,11 +14,11 @@ const errorMiddleware = (err, req: Request, res: Response, next: NextFunction) =
     console.error(err)
     
     // Mongoose bad ObjectId
-    if (err.name === 'CastError'{
+    if (err.name === 'CastError'){
       const message = 'Resource not found';
       error = new Error(message);
       error.statusCode = 404;
-    });
+    };
 
     // Mongoose duplicate key
     if (err.code === 11000) {
@@ -23,7 +29,7 @@ const errorMiddleware = (err, req: Request, res: Response, next: NextFunction) =
 
     // Mongoose validation error
     if (err.name === 'ValidationError') {
-      const message = Object.values(err.errors).map(val => val.message);
+      const message = Object.values(err.errors ?? {}).map(val => val.message);
       error = new Error(message.join(', '));
       error.statusCode = 400
     }
