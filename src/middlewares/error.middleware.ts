@@ -1,10 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-
-interface AppError extends Error {
-  statusCode?: number;
-  code?: number; // Mongo duplicate key (11000)
-  errors?: Record<string, { message: string }>; // Mongoose validation errors
-}
+import type { AppError } from "../types/error.types.js";
 
 const errorMiddleware = (err: AppError, req: Request, res: Response, next: NextFunction) => {
   try {
